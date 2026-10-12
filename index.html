@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Ideas by Tony | Two-Tone ABS Designer</title>
+<style>
+  :root { --ink:#171923; --muted:#626777; --line:#dfe2e8; --panel:#f6f7f9; --accent:#b58a3a; --black:#101114; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#f3f4f6; color:var(--ink); font:16px/1.45 Arial,Helvetica,sans-serif; }
+  .wrap { max-width:1160px; margin:0 auto; padding:24px 16px 40px; }
+  header { background:#171923; color:white; border-radius:18px; padding:25px 28px; margin-bottom:20px; }
+  .eyebrow { text-transform:uppercase; letter-spacing:.12em; font-size:.76rem; color:#e6c681; font-weight:700; }
+  h1 { font-size:clamp(1.65rem,4vw,2.4rem); line-height:1.12; margin:8px 0; }
+  header p { margin:8px 0 0; max-width:720px; color:#e1e3e8; }
+  .layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(300px,.9fr); gap:20px; align-items:start; }
+  .card { background:white; border:1px solid var(--line); border-radius:16px; padding:20px; box-shadow:0 4px 18px #1c233008; }
+  h2 { font-size:1.18rem; margin:0 0 16px; }
+  .field { margin-bottom:17px; }
+  label, .label { display:block; font-size:.92rem; font-weight:700; margin-bottom:7px; }
+  input, select, textarea { width:100%; border:1px solid #cdd1da; border-radius:9px; padding:11px 12px; font:inherit; background:white; color:var(--ink); }
+  textarea { resize:vertical; min-height:88px; }
+  input:focus,select:focus,textarea:focus { outline:2px solid #d5b875; border-color:#987127; }
+  .hint { color:var(--muted); font-size:.82rem; margin-top:5px; }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .swatches { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .swatch { border:2px solid var(--line); border-radius:11px; padding:10px; cursor:pointer; background:white; text-align:left; color:var(--ink); font:inherit; }
+  .swatch[aria-pressed="true"] { border-color:#a5792c; box-shadow:0 0 0 2px #ead9b8; }
+  .sample { height:42px; border-radius:6px; margin-bottom:8px; display:flex; align-items:center; justify-content:center; font-size:.8rem; font-weight:700; letter-spacing:.06em; }
+  .sample.steel { background:linear-gradient(115deg,#c9cdd0,#f0f1f1 35%,#9fa5aa 65%,#e0e2e3); color:#111; }
+  .sample.gold { background:linear-gradient(115deg,#9e762d,#f1d18a 35%,#b58a3a 68%,#e9c778); color:#111; }
+  .preview-board { background:#e9ebef; border-radius:14px; padding:20px; min-height:245px; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .plaque { width:100%; max-width:460px; aspect-ratio:2.8 / 1; background:#101114; border:2px solid #292a2e; border-radius:4px; box-shadow:0 12px 22px #0002; padding:10px; display:flex; flex-direction:column; justify-content:center; gap:2px; overflow:hidden; }
+  .plaque.steel { --engrave:linear-gradient(100deg,#aeb4b8,#f5f6f6 28%,#9ca3a8 60%,#e5e7e8); }
+  .plaque.gold { --engrave:linear-gradient(100deg,#9f762b,#f2d48e 30%,#b18435 64%,#f0d28b); }
+  .preview-line { color:transparent; background:var(--engrave); -webkit-background-clip:text; background-clip:text; text-align:center; line-height:1.05; overflow-wrap:anywhere; word-break:break-word; }
+  .preview-line:empty::after { content:"YOUR TEXT"; color:#858991; background:none; -webkit-background-clip:initial; background-clip:initial; }
+  .pricebox { border:1px solid #e6d5b2; background:#fffaf0; border-radius:12px; padding:15px; margin-top:15px; }
+  .price { font-size:2rem; font-weight:800; letter-spacing:-.03em; }
+  .price-note { font-size:.82rem; color:#6b604c; }
+  .btn { display:inline-flex; justify-content:center; align-items:center; border:0; border-radius:10px; padding:12px 16px; font:700 1rem Arial,sans-serif; cursor:pointer; text-decoration:none; }
+  .btn.primary { background:#171923; color:white; width:100%; }
+  .btn.secondary { background:#eceef2; color:#171923; width:100%; margin-top:9px; }
+  .btn:hover { filter:brightness(1.08); }
+  .summary { white-space:pre-wrap; background:#f7f8fa; border:1px solid var(--line); border-radius:10px; padding:12px; font-size:.88rem; margin:12px 0; }
+  .fine { color:var(--muted); font-size:.8rem; }
+  .notice { background:#fff4d8; border:1px solid #e9ce87; border-radius:10px; padding:12px; font-size:.86rem; margin-top:16px; }
+  footer { text-align:center; color:var(--muted); font-size:.82rem; padding:20px 0 0; }
+  @media(max-width:800px) { .layout { grid-template-columns:1fr; } .wrap{padding:14px 10px 28px;} header{padding:22px 19px;} .card{padding:16px;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Smart Ideas by Tony</div>
+    <h1>Design your own two-tone ABS engraving</h1>
+    <p>Personalise a nameplate, plaque or sign. Choose your finish, wording, font and size, then see a preview and an estimated price before sending your order enquiry.</p>
+  </header>
+
+  <div class="layout">
+    <section class="card" aria-label="Customise your engraving">
+      <h2>1. Make it yours</h2>
+      <div class="field">
+        <span class="label">Choose your finish</span>
+        <div class="swatches">
+          <button type="button" class="swatch" data-finish="steel" aria-pressed="true">
+            <span class="sample steel">BRUSHED STEEL</span><strong>Brushed steel / black</strong>
+          </button>
+          <button type="button" class="swatch" data-finish="gold" aria-pressed="false">
+            <span class="sample gold">BRUSHED GOLD</span><strong>Brushed gold / black</strong>
+          </button>
+        </div>
+      </div>
+      <div class="field">
+        <label for="lineCount">Number of text lines</label>
+        <select id="lineCount">
+          <option value="1">1 line</option><option value="2" selected>2 lines</option><option value="3">3 lines</option><option value="4">4 lines</option><option value="5">5 lines</option>
+        </select>
+      </div>
+      <div id="textFields"></div>
+      <div class="field">
+        <label for="font">Lettering style</label>
+        <select id="font">
+          <option value="Arial, Helvetica, sans-serif">Arial — clean and modern</option>
+          <option value="Arial Black, Arial, sans-serif">Arial Black — heavy</option>
+          <option value="Georgia, serif">Georgia — traditional serif</option>
+          <option value="Times New Roman, serif">Times New Roman — classic</option>
+          <option value="Trebuchet MS, sans-serif">Trebuchet — rounded</option>
+          <option value="Courier New, monospace">Courier New — technical</option>
+          <option value="cursive">Cursive — decorative preview</option>
+        </select>
+        <div class="hint">The preview uses fonts available in the visitor’s browser. Final lettering may vary slightly when prepared for engraving.</div>
+      </div>
+      <div class="field">
+        <label for="alignment">Text alignment</label>
+        <select id="alignment"><option value="center">Centred</option><option value="left">Left aligned</option><option value="right">Right aligned</option></select>
+      </div>
+      <h2>2. Choose the size</h2>
+      <div class="field">
+        <label for="sizePreset">Standard size or custom dimensions</label>
+        <select id="sizePreset">
+          <option value="60x20">60 × 20 mm</option>
+          <option value="80x25">80 × 25 mm</option>
+          <option value="100x30" selected>100 × 30 mm</option>
+          <option value="100x50">100 × 50 mm</option>
+          <option value="150x50">150 × 50 mm</option>
+          <option value="custom">Custom dimensions</option>
+        </select>
+      </div>
+      <div class="two" id="customSize" hidden>
+        <div class="field"><label for="widthMm">Width (mm)</label><input id="widthMm" type="number" min="20" max="300" value="100"></div>
+        <div class="field"><label for="heightMm">Height (mm)</label><input id="heightMm" type="number" min="10" max="200" value="30"></div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="quantity">Quantity</label><input id="quantity" type="number" min="1" max="500" value="1"></div>
+        <div class="field"><label for="purpose">Intended use (optional)</label><select id="purpose"><option>General plaque or sign</option><option>Door or desk nameplate</option><option>Award or presentation</option><option>Memorial item</option><option>Other</option></select></div>
+      </div>
+      <div class="field">
+        <label for="notes">Extra requirements (optional)</label>
+        <textarea id="notes" placeholder="For example: mounting holes, rounded corners, or where the plaque will be used."></textarea>
+      </div>
+    </section>
+
+    <aside class="card" aria-label="Preview and order">
+      <h2>Live preview</h2>
+      <div class="preview-board">
+        <div id="plaque" class="plaque steel" aria-label="Engraving preview">
+          <div class="preview-line"></div><div class="preview-line"></div><div class="preview-line"></div><div class="preview-line"></div><div class="preview-line"></div>
+        </div>
+      </div>
+      <p class="hint">Illustrative preview only. The actual appearance depends on the material, text size and laser settings.</p>
+      <div class="pricebox">
+        <div class="label">Estimated price</div>
+        <div class="price" id="price">£5.00</div>
+        <div class="price-note" id="priceNote">Provisional estimate — confirm your pricing before publishing this page.</div>
+      </div>
+      <h2 style="margin-top:22px">Your order summary</h2>
+      <div class="summary" id="summary" aria-live="polite"></div>
+      <button type="button" class="btn primary" id="emailOrder">Request / place order by email</button>
+      <button type="button" class="btn secondary" id="copyOrder">Copy order details</button>
+      <p class="fine">This demo prepares an email or copies your specification. It does not take payment or submit an order to a server. Add your business email address in the settings in the page code before publishing.</p>
+      <div class="notice"><strong>Before going live:</strong> replace the example pricing and email address in the code with your real prices and contact details. Confirm any minimum order, VAT, delivery and payment terms.</div>
+    </aside>
+  </div>
+  <footer>Smart Ideas by Tony · Personalised two-tone ABS engraving</footer>
+</div>
+<script>
+/* ===================== OWNER SETTINGS =====================
+   Change these values before publishing:
+   EMAIL: where customer enquiries should go.
+   SETUP_FEE: one-off preparation charge per order.
+   RATE_PER_CM2: material/engraving rate per square centimetre.
+   MINIMUM_ITEM_PRICE: minimum price for one item.
+   MULTIPLIER: optional multiplier for gold finish.
+   These are DEMONSTRATION figures, not a recommended price list.
+*/
+const OWNER = {
+  email: "YOUR-EMAIL@example.com",
+  setupFee: 2.50,
+  ratePerCm2: 0.08,
+  minimumItemPrice: 5.00,
+  goldMultiplier: 1.10
+};
+/* ========================================================= */
+const $ = id => document.getElementById(id);
+let finish = "steel";
+const textFields = $("textFields");
+function renderTextInputs() {
+  const n = Number($("lineCount").value);
+  const old = [...textFields.querySelectorAll("input")].map(x => x.value);
+  textFields.innerHTML = "";
+  for (let i=0;i<n;i++) {
+    const wrap = document.createElement("div");
+    wrap.className = "field";
+    const label = document.createElement("label");
+    label.htmlFor = "line" + i;
+    label.textContent = "Line " + (i+1) + " wording";
+    const input = document.createElement("input");
+    input.id = "line" + i;
+    input.maxLength = 70;
+    input.placeholder = i===0 ? "Enter your main wording" : "Optional second line";
+    input.value = old[i] || "";
+    input.addEventListener("input", update);
+    wrap.append(label,input);
+    textFields.append(wrap);
+  }
+  update();
+}
+function dimensions() {
+  if ($("sizePreset").value === "custom") {
+    return {w:Number($("widthMm").value)||0,h:Number($("heightMm").value)||0};
+  }
+  const [w,h] = $("sizePreset").value.split("x").map(Number);
+  return {w,h};
+}
+function money(n) { return new Intl.NumberFormat("en-GB",{style:"currency",currency:"GBP"}).format(n); }
+function getLines() { return [...textFields.querySelectorAll("input")].map(x=>x.value.trim()); }
+function calc() {
+  const {w,h}=dimensions();
+  const qty=Math.max(1,Math.min(500,Number($("quantity").value)||1));
+  const area=(w*h)/100;
+  const perItem=Math.max(OWNER.minimumItemPrice,area*OWNER.ratePerCm2) * (finish==="gold" ? OWNER.goldMultiplier : 1);
+  const subtotal=perItem*qty+OWNER.setupFee;
+  return {w,h,qty,perItem,total:subtotal};
+}
+function orderText() {
+  const c=calc(), lines=getLines();
+  return [
+    "SMART IDEAS BY TONY — TWO-TONE ABS ENQUIRY",
+    "Finish: "+(finish==="steel"?"Brushed steel / black":"Brushed gold / black"),
+    "Wording:",
+    ...lines.map((x,i)=>"  Line "+(i+1)+": "+(x||"(blank)")),
+    "Font: "+$("font").selectedOptions[0].textContent,
+    "Alignment: "+$("alignment").selectedOptions[0].textContent,
+    "Size: "+c.w+" × "+c.h+" mm",
+    "Quantity: "+c.qty,
+    "Intended use: "+$("purpose").value,
+    "Extra requirements: "+($("notes").value.trim()||"None"),
+    "Estimated total: "+money(c.total),
+    "",
+    "Please confirm the final price, production details, delivery and payment arrangements."
+  ].join("\n");
+}
+function update() {
+  const lines=getLines(), font=$("font").value, align=$("alignment").value, c=calc();
+  $("plaque").className="plaque "+finish;
+  const preview=[...$("plaque").querySelectorAll(".preview-line")];
+  const longest=Math.max(1,...lines.map(x=>x.length));
+  const fontSize=Math.max(8,Math.min(28,Math.floor(390/(longest*0.62))));
+  preview.forEach((el,i)=>{
+    el.textContent=lines[i]||"";
+    el.style.fontFamily=font;
+    el.style.textAlign=align;
+    el.style.fontSize=fontSize+"px";
+    el.style.display=i<lines.length?"block":"none";
+  });
+  $("plaque").style.aspectRatio=(c.w>0&&c.h>0)?(c.w/c.h):"2.8 / 1";
+  $("price").textContent=money(c.total);
+  $("priceNote").textContent="Example estimate: "+money(c.perItem)+" per item + "+money(OWNER.setupFee)+" setup. Not a confirmed quotation.";
+  $("summary").textContent=orderText();
+  $("customSize").hidden=$("sizePreset").value!=="custom";
+  $("widthMm").setAttribute("aria-label","Custom width in millimetres");
+}
+document.querySelectorAll("[data-finish]").forEach(btn=>btn.addEventListener("click",()=>{
+  finish=btn.dataset.finish;
+  document.querySelectorAll("[data-finish]").forEach(b=>b.setAttribute("aria-pressed",String(b===btn)));
+  update();
+}));
+$("lineCount").addEventListener("change",renderTextInputs);
+["font","alignment","sizePreset","widthMm","heightMm","quantity","purpose","notes"].forEach(id=>$(id).addEventListener("input",update));
+$("sizePreset").addEventListener("change",update);
+$("emailOrder").addEventListener("click",()=>{
+  if (!OWNER.email || OWNER.email.includes("YOUR-EMAIL")) {
+    alert("The page owner needs to add their business email address in the OWNER settings before email ordering can work.\n\nYou can still use Copy order details.");
+    return;
+  }
+  const subject=encodeURIComponent("Two-tone ABS order enquiry");
+  const body=encodeURIComponent(orderText());
+  window.location.href="mailto:"+OWNER.email+"?subject="+subject+"&body="+body;
+});
+$("copyOrder").addEventListener("click",async()=>{
+  try {
+    await navigator.clipboard.writeText(orderText());
+    $("copyOrder").textContent="Copied!";
+    setTimeout(()=>$("copyOrder").textContent="Copy order details",1800);
+  } catch(e) {
+    const area=document.createElement("textarea"); area.value=orderText(); document.body.append(area); area.select();
+    document.execCommand("copy"); area.remove();
+    $("copyOrder").textContent="Copied!";
+    setTimeout(()=>$("copyOrder").textContent="Copy order details",1800);
+  }
+});
+renderTextInputs();
+</script>
+</body>
+</html>
